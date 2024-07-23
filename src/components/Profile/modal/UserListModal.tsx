@@ -28,17 +28,16 @@ interface UserListModalProps {
 const UserListModal = ({ accessToken, loginedId }: UserListModalProps) => {
   const searchParams = useSearchParams();
   const userId = Number(searchParams?.get('userId')) ?? loginedId;
-  const followType = searchParams?.get('type') ?? 'follower';
+  const followType = searchParams?.get('type');
   const isFollowerList = followType === 'follower';
-
   const {
     data: followListData,
     fetchNextPage,
     isFetchingNextPage,
   } = useSuspenseInfiniteQuery<FollowDataPage>(
     isFollowerList
-      ? followerOptions(userId, followType)
-      : followeeOptions(userId, followType),
+      ? followerOptions(userId, 'follower')
+      : followeeOptions(userId, 'followee'),
   );
 
   const { data: userInfoData } = useSuspenseQuery(

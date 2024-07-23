@@ -19,7 +19,11 @@ import {
   getUserFavoriteProducts,
   getUserReviewedProducts,
 } from '@/shared/@common/apis';
-import { productOptions, profileOptions } from './queryOptions';
+import {
+  followeeOptions,
+  followerOptions,
+  productOptions,
+} from './queryOptions';
 
 interface ProfileProps {
   searchParams: {
@@ -33,7 +37,13 @@ export default async function Profile({ searchParams }: ProfileProps) {
   const userId = searchParams.userId ?? loginedId;
   const queryClient = getQueryClient();
   await Promise.all([
-    queryClient.prefetchQuery(profileOptions(Number(userId), accessToken)),
+    queryClient.prefetchInfiniteQuery(
+      followerOptions(Number(userId), 'follower'),
+    ),
+    queryClient.prefetchInfiniteQuery(
+      followeeOptions(Number(userId), 'followee'),
+    ),
+
     queryClient.prefetchInfiniteQuery(
       productOptions(
         Number(userId),
