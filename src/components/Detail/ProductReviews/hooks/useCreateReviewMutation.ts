@@ -1,7 +1,7 @@
 import { productKeys } from '@/app/[category]/[product]/queryKeyFactories';
-import { ProfileKeys } from '@/app/profile/queryKeyFactories';
+import { profileKeys } from '@/app/profile/queryKeyFactories';
 import { PostReviewProps, postReview } from '@/shared/@common/apis';
-import { useProfileStore } from '@/stores/useProfileStore';
+import useAuthStore from '@/stores/useAuthStore';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
@@ -21,8 +21,7 @@ export const useCreateReviewMutation = ({
   currentFilter,
 }: CreateReviewProps) => {
   const router = useRouter();
-  const userId = useProfileStore((state) => state.currentProfileId);
-
+  const userId = useAuthStore((state) => state.userId);
   return useMutation({
     mutationFn: async (data: PostReviewProps) => {
       const response = await postReview(data, accessToken);
@@ -46,7 +45,8 @@ export const useCreateReviewMutation = ({
         queryKey: productKeys.detail(productId),
       });
       queryClient.invalidateQueries({
-        queryKey: ProfileKeys.productCard(Number(userId), 'reviewedProduct'),
+        queryKey: profileKeys.productCard(Number(userId), 'reviewedProduct'),
+        refetchType: 'inactive',
       });
     },
   });
