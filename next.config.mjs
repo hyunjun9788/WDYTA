@@ -1,14 +1,14 @@
-import fs from 'fs';
-import path from 'path';
+// import fs from 'fs';
+// import path from 'path';
 
-const packageJsonPath = path.resolve(process.cwd(), 'package.json');
-const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-const { version: packageVersion } = packageJson;
+// const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+// const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+// const { version: packageVersion } = packageJson;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  assetPrefix: `${process.env.CDN_BASE_URL}/${packageVersion}`,
+  // assetPrefix: `${process.env.CDN_BASE_URL}/${packageVersion}`,
   images: {
     remotePatterns: [
       {
