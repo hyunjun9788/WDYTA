@@ -8,7 +8,6 @@ import useAuthStore from '@/stores/useAuthStore';
 
 interface ProductAddProps {
   accessToken: string;
-  userId: string;
   setErrorMessage: (message: string) => void;
   productCategoryId: number;
   queryClient: QueryClient;
