@@ -15,7 +15,7 @@
 다양한 분야의 상품을 리뷰하는 플랫폼
 ```
 
-🔗 프로젝트 링크 [WDYTA](https://www.wdyta.store/)
+🔗 프로젝트 링크 [WDYTA](https://wdyta.vercel.app/)
 
 📅 개발 기간 : 24.05.18 ~ 24.06.24 (6주)
 
